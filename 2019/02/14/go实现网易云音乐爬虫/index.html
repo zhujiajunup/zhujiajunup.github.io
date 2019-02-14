@@ -1,0 +1,1150 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="baidu-site-verification" content="1GDGNEh1H9">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="go,爬虫,云音乐,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="前言最近在学习go，学习一门语言最好的方式就是实践，之前学习python也是从爬虫入手，现在使用go语言写一个网易云音乐的爬虫，下面会简单介绍开发的过程，代码是初学者的水平，欢迎吐槽。 本项目github地址https://github.com/zhujiajunup/yunyinyue 开发工具  go1.11.2 windows/amd64 Google Chrome 71.0.3578.98">
+<meta name="keywords" content="go,爬虫,云音乐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go实现网易云音乐爬虫">
+<meta property="og:url" content="https://zhujiajunup.github.io/2019/02/14/go实现网易云音乐爬虫/index.html">
+<meta property="og:site_name" content="zhujiajunup">
+<meta property="og:description" content="前言最近在学习go，学习一门语言最好的方式就是实践，之前学习python也是从爬虫入手，现在使用go语言写一个网易云音乐的爬虫，下面会简单介绍开发的过程，代码是初学者的水平，欢迎吐槽。 本项目github地址https://github.com/zhujiajunup/yunyinyue 开发工具  go1.11.2 windows/amd64 Google Chrome 71.0.3578.98">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/1rrwJ3Q.png">
+<meta property="og:image" content="https://i.imgur.com/01laJRf.png">
+<meta property="og:image" content="https://i.imgur.com/nEm9AhP.png">
+<meta property="og:image" content="https://i.imgur.com/hDXxNJ0.png">
+<meta property="og:image" content="https://i.imgur.com/LEJmpP2.png">
+<meta property="og:image" content="https://i.imgur.com/cDofOrI.png">
+<meta property="og:image" content="https://i.imgur.com/JkDK5hK.png">
+<meta property="og:image" content="https://i.imgur.com/Nh6GOTo.png">
+<meta property="og:image" content="https://i.imgur.com/fRDixtb.png">
+<meta property="og:image" content="https://i.imgur.com/sW16J6O.png">
+<meta property="og:updated_time" content="2019-02-14T10:38:04.067Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="go实现网易云音乐爬虫">
+<meta name="twitter:description" content="前言最近在学习go，学习一门语言最好的方式就是实践，之前学习python也是从爬虫入手，现在使用go语言写一个网易云音乐的爬虫，下面会简单介绍开发的过程，代码是初学者的水平，欢迎吐槽。 本项目github地址https://github.com/zhujiajunup/yunyinyue 开发工具  go1.11.2 windows/amd64 Google Chrome 71.0.3578.98">
+<meta name="twitter:image" content="https://i.imgur.com/1rrwJ3Q.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhujiajunup.github.io/2019/02/14/go实现网易云音乐爬虫/">
+
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+  <title> go实现网易云音乐爬虫 | zhujiajunup </title>
+</head>
+
+  	 <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("kJ2sJuSJeByLioULSXrJ5CSq-9Nh9j0Va", "uBWeNxCbFEWsOVDTmAInrDq3");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0728ed3533d365af98cf27a123fc0262";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhujiajunup</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://zhujiajunup.github.io/2019/02/14/go实现网易云音乐爬虫/">
+
+  <span style="display:none" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="zhujiajunup">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/head.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="zhujiajunup">
+    <span style="display:none" itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="zhujiajunup" src="/images/avatar.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                go实现网易云音乐爬虫
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-14T16:59:46+08:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+		  
+			 
+          
+          
+             <span id="/2019/02/14/go实现网易云音乐爬虫/" class="leancloud_visitors" data-flag-title="go实现网易云音乐爬虫">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+		   
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在学习go，学习一门语言最好的方式就是实践，之前学习python也是从爬虫入手，现在使用go语言写一个网易云音乐的爬虫，下面会简单介绍开发的过程，代码是初学者的水平，欢迎吐槽。</p>
+<p>本项目github地址<a href="https://github.com/zhujiajunup/yunyinyue" target="_blank" rel="noopener">https://github.com/zhujiajunup/yunyinyue</a></p>
+<p>开发工具</p>
+<ul>
+<li>go1.11.2 windows/amd64</li>
+<li>Google Chrome 71.0.3578.98</li>
+<li>Fiddler v5.0.20182.28034</li>
+</ul>
+<h1 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h1><p>不管用什么语言写爬虫，但步骤总是一致的，只是实现使用不应的语言而已，第一步当然是确认你想要什么，本次的目标是网易云音乐，我是想获取用户首页的听歌排行榜。</p>
+<p><img src="https://i.imgur.com/1rrwJ3Q.png" alt=""></p>
+<p>最先需要弄明白的是这些数据是怎么获取的，即云音乐是如何向服务器请求数据的，打开chrome的调试工具（F12）,点到Network，搜索“钟无艳”</p>
+<p><img src="https://i.imgur.com/01laJRf.png" alt=""></p>
+<p>可以看到数据是<a href="https://music.163.com/weapi/v1/play/record?csrf_token=" target="_blank" rel="noopener">https://music.163.com/weapi/v1/play/record?csrf_token=</a> 的POST请求来获取的，再看看该请求发送了什么数据</p>
+<p><img src="https://i.imgur.com/nEm9AhP.png" alt=""></p>
+<p>可以看到提交了一个表单，参数为params和encSecKey。发送的数据应该是加了密的，下一步就需要知道云音乐是如何进行加密传输的。</p>
+<p><img src="https://i.imgur.com/hDXxNJ0.png" alt=""></p>
+<p>从调试窗口可以看到，该请求是由<a href="https://s3.music.126.net/web/s/core_86994123ce247287ad52aafce6acdf9b.js?86994123ce247287ad52aafce6acdf9b" target="_blank" rel="noopener">https://s3.music.126.net/web/s/core_86994123ce247287ad52aafce6acdf9b.js?86994123ce247287ad52aafce6acdf9b</a> 发出的，加密逻辑应该就是在该js中处理的，将该js保存到本地并格式化后，并搜索encSecKey在哪里赋值的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">v9m.bl9c = function(Y9P, e8e) &#123;</span><br><span class="line">        var i8a = &#123;&#125;,</span><br><span class="line">        e8e = NEJ.X(&#123;&#125;,</span><br><span class="line">        e8e),</span><br><span class="line">        mp3x = Y9P.indexOf(&quot;?&quot;);</span><br><span class="line">        if (window.GEnc &amp;&amp; /(^|\.com)\/api/.test(Y9P) &amp;&amp; !(e8e.headers &amp;&amp; e8e.headers[eq1x.Bx8p] == eq1x.Iy0x) &amp;&amp; !e8e.noEnc) &#123;</span><br><span class="line">            if (mp3x != -1) &#123;</span><br><span class="line">                i8a = k8c.hc2x(Y9P.substring(mp3x + 1));</span><br><span class="line">                Y9P = Y9P.substring(0, mp3x)</span><br><span class="line">            &#125;</span><br><span class="line">            if (e8e.query) &#123;</span><br><span class="line">                i8a = NEJ.X(i8a, k8c.fQ1x(e8e.query) ? k8c.hc2x(e8e.query) : e8e.query)</span><br><span class="line">            &#125;</span><br><span class="line">            if (e8e.data) &#123;</span><br><span class="line">                i8a = NEJ.X(i8a, k8c.fQ1x(e8e.data) ? k8c.hc2x(e8e.data) : e8e.data)</span><br><span class="line">            &#125;</span><br><span class="line">            i8a[&quot;csrf_token&quot;] = v9m.gO2x(&quot;__csrf&quot;);</span><br><span class="line">            Y9P = Y9P.replace(&quot;api&quot;, &quot;weapi&quot;);</span><br><span class="line">            e8e.method = &quot;post&quot;;</span><br><span class="line">            delete e8e.query;</span><br><span class="line">            var bUK2x = window.asrsea(JSON.stringify(i8a), brA4E([&quot;流泪&quot;, &quot;强&quot;]), brA4E(WU5Z.md), brA4E([&quot;爱心&quot;, &quot;女孩&quot;, &quot;惊恐&quot;, &quot;大笑&quot;]));</span><br><span class="line">            e8e.data = k8c.cz9q(&#123;</span><br><span class="line">                params: bUK2x.encText,</span><br><span class="line">                encSecKey: bUK2x.encSecKey</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        cwC9t(Y9P, e8e)</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到是通过window.asrsea函数来获取的，接下来看window.asrsea是如何定义的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">function() &#123;</span><br><span class="line">    function a(a) &#123;</span><br><span class="line">        var d, e, b = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;,</span><br><span class="line">        c = &quot;&quot;;</span><br><span class="line">        for (d = 0; a &gt; d; d += 1) e = Math.random() * b.length,</span><br><span class="line">        e = Math.floor(e),</span><br><span class="line">        c += b.charAt(e);</span><br><span class="line">        return c</span><br><span class="line">    &#125;</span><br><span class="line">    function b(a, b) &#123;</span><br><span class="line">        var c = CryptoJS.enc.Utf8.parse(b),</span><br><span class="line">        d = CryptoJS.enc.Utf8.parse(&quot;0102030405060708&quot;),</span><br><span class="line">        e = CryptoJS.enc.Utf8.parse(a),</span><br><span class="line">        f = CryptoJS.AES.encrypt(e, c, &#123;</span><br><span class="line">            iv: d,</span><br><span class="line">            mode: CryptoJS.mode.CBC</span><br><span class="line">        &#125;);</span><br><span class="line">        return f.toString()</span><br><span class="line">    &#125;</span><br><span class="line">    function c(a, b, c) &#123;</span><br><span class="line">        var d, e;</span><br><span class="line">        return setMaxDigits(131),</span><br><span class="line">        d = new RSAKeyPair(b, &quot;&quot;, c),</span><br><span class="line">        e = encryptedString(d, a)</span><br><span class="line">    &#125;</span><br><span class="line">    function d(d, e, f, g) &#123;</span><br><span class="line">        var h = &#123;&#125;,</span><br><span class="line">        i = a(16);</span><br><span class="line">        return h.encText = b(d, g),</span><br><span class="line">        h.encText = b(h.encText, i),</span><br><span class="line">        h.encSecKey = c(i, e, f),</span><br><span class="line">        h</span><br><span class="line">    &#125;</span><br><span class="line">    function e(a, b, d, e) &#123;</span><br><span class="line">        var f = &#123;&#125;;</span><br><span class="line">        return f.encText = c(a + e, b, d),</span><br><span class="line">        f</span><br><span class="line">    &#125;</span><br><span class="line">    window.asrsea = d,</span><br><span class="line">    window.ecnonasr = e</span><br><span class="line">&#125; ();</span><br></pre></td></tr></table></figure></p>
+<p>加密算法就是这段代码，函数接收四个参数，进行了aes和ras加密，具体逻辑这里不进行详解，知道了处理逻辑，现在得获取这四个参数分别是什么，接下来使用Fiddler来将js替换为本地js,将参数打印出来即可。</p>
+<h2 id="Fiddler调试获取参数"><a href="#Fiddler调试获取参数" class="headerlink" title="Fiddler调试获取参数"></a>Fiddler调试获取参数</h2><ul>
+<li>配置代理<br><img src="https://i.imgur.com/LEJmpP2.png" alt=""></li>
+<li>配置Https</li>
+</ul>
+<p><img src="https://i.imgur.com/cDofOrI.png" alt=""></p>
+<ul>
+<li><p>修改core.js<br>将<a href="https://s3.music.126.net/web/s/core_86994123ce247287ad52aafce6acdf9b.js?86994123ce247287ad52aafce6acdf9b" target="_blank" rel="noopener">https://s3.music.126.net/web/s/core_86994123ce247287ad52aafce6acdf9b.js?86994123ce247287ad52aafce6acdf9b</a><br>保存到本地，比如命名为core.js，编辑器打开编辑，在指定位置添加如下打印信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">v9m.bl9c = function(Y9P, e8e) &#123;</span><br><span class="line">        var i8a = &#123;&#125;,</span><br><span class="line">        e8e = NEJ.X(&#123;&#125;,</span><br><span class="line">        e8e),</span><br><span class="line">        mp3x = Y9P.indexOf(&quot;?&quot;);</span><br><span class="line">        if (window.GEnc &amp;&amp; /(^|\.com)\/api/.test(Y9P) &amp;&amp; !(e8e.headers &amp;&amp; e8e.headers[eq1x.Bx8p] == eq1x.Iy0x) &amp;&amp; !e8e.noEnc) &#123;</span><br><span class="line">            if (mp3x != -1) &#123;</span><br><span class="line">                i8a = k8c.hc2x(Y9P.substring(mp3x + 1));</span><br><span class="line">                Y9P = Y9P.substring(0, mp3x)</span><br><span class="line">            &#125;</span><br><span class="line">            if (e8e.query) &#123;</span><br><span class="line">                i8a = NEJ.X(i8a, k8c.fQ1x(e8e.query) ? k8c.hc2x(e8e.query) : e8e.query)</span><br><span class="line">            &#125;</span><br><span class="line">            if (e8e.data) &#123;</span><br><span class="line">                i8a = NEJ.X(i8a, k8c.fQ1x(e8e.data) ? k8c.hc2x(e8e.data) : e8e.data)</span><br><span class="line">            &#125;</span><br><span class="line">            i8a[&quot;csrf_token&quot;] = v9m.gO2x(&quot;__csrf&quot;);</span><br><span class="line">           </span><br><span class="line">            Y9P = Y9P.replace(&quot;api&quot;, &quot;weapi&quot;);</span><br><span class="line">            e8e.method = &quot;post&quot;;</span><br><span class="line">            delete e8e.query;</span><br><span class="line">            var bUK2x = window.asrsea(JSON.stringify(i8a), brA4E([&quot;流泪&quot;, &quot;强&quot;]), brA4E(WU5Z.md), brA4E([&quot;爱心&quot;, &quot;女孩&quot;, &quot;惊恐&quot;, &quot;大笑&quot;]));</span><br><span class="line">            window.console.info(Y9P);</span><br><span class="line">            window.console.info(JSON.stringify(i8a));</span><br><span class="line">            window.console.info(JSON.stringify( brA4E([&quot;流泪&quot;, &quot;强&quot;])));</span><br><span class="line">            window.console.info(JSON.stringify(brA4E(WU5Z.md)));</span><br><span class="line">            window.console.info(JSON.stringify(brA4E([&quot;爱心&quot;, &quot;女孩&quot;, &quot;惊恐&quot;, &quot;大笑&quot;])));</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            e8e.data = k8c.cz9q(&#123;</span><br><span class="line">                params: bUK2x.encText,</span><br><span class="line">                encSecKey: bUK2x.encSecKey</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        cwC9t(Y9P, e8e)</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置Fiddler Rule<br><img src="https://i.imgur.com/JkDK5hK.png" alt=""></p>
+</li>
+</ul>
+<p>一切准备就绪后，再打开浏览器，输入<a href="https://music.163.com/#/user/songs/rank?id=62947535" target="_blank" rel="noopener">https://music.163.com/#/user/songs/rank?id=62947535</a> ，打开调试窗口得Console，就可以看到本地js中添加的输出日志了</p>
+<p><img src="https://i.imgur.com/Nh6GOTo.png" alt=""></p>
+<p>不难发现除了第一个参数外，其他三个参数都是固定的，因此在后面的处理中，只需要处理第一个参数即可。</p>
+<p>第一个参数就是加密前的请求参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;uid&quot;: &quot;62947535&quot;,</span><br><span class="line">  &quot;type&quot;: &quot;-1&quot;,</span><br><span class="line">  &quot;limit&quot;: &quot;1000&quot;,</span><br><span class="line">  &quot;offset&quot;: &quot;0&quot;,</span><br><span class="line">  &quot;total&quot;: &quot;true&quot;,</span><br><span class="line">  &quot;csrf_token&quot;: &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么已经弄清楚了数据获取的逻辑，接下来就是按照这个逻辑用go语言实现一遍了，最关键的就是加密算法了</p>
+<h2 id="go实现"><a href="#go实现" class="headerlink" title="go实现"></a>go实现</h2><p>项目结构</p>
+<p><img src="https://i.imgur.com/fRDixtb.png" alt=""></p>
+<h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><p>来自<a href="https://studygolang.com/topics/5815" target="_blank" rel="noopener">https://studygolang.com/topics/5815</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">Package encrypt provides encrypt algorithm such as rsa &amp; aes</span><br><span class="line">*/</span><br><span class="line">package encrypt</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;bytes&quot;</span><br><span class="line">	&quot;crypto/aes&quot;</span><br><span class="line">	&quot;crypto/cipher&quot;</span><br><span class="line">	&quot;encoding/base64&quot;</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;math/big&quot;</span><br><span class="line">	&quot;math/rand&quot;</span><br><span class="line">	&quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">// generate string for given size</span><br><span class="line">func RandomStr(size int) (result []byte) &#123;</span><br><span class="line">	s := &quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span><br><span class="line">	strBytes := []byte(s)</span><br><span class="line">	r := rand.New(rand.NewSource(time.Now().UnixNano()))</span><br><span class="line">	for i := 0; i &lt; size; i++ &#123;</span><br><span class="line">		result = append(result, strBytes[r.Intn(len(strBytes))])</span><br><span class="line">	&#125;</span><br><span class="line">	return</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func AesEncrypt(sSrc string, sKey string, aseKey string) (string, error) &#123;</span><br><span class="line">	iv := []byte(aseKey)</span><br><span class="line">	block, err := aes.NewCipher([]byte(sKey))</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return &quot;&quot;, err</span><br><span class="line">	&#125;</span><br><span class="line">	padding := block.BlockSize() - len([]byte(sSrc))%block.BlockSize()</span><br><span class="line">	src := append([]byte(sSrc), bytes.Repeat([]byte&#123;byte(padding)&#125;, padding)...)</span><br><span class="line"></span><br><span class="line">	model := cipher.NewCBCEncrypter(block, iv)</span><br><span class="line">	cipherText := make([]byte, len(src))</span><br><span class="line">	model.CryptBlocks(cipherText, src)</span><br><span class="line">	return base64.StdEncoding.EncodeToString(cipherText), nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func RsaEncrypt(key string, pubKey string, modulus string) string &#123;</span><br><span class="line">	rKey := &quot;&quot;</span><br><span class="line">	for i := len(key) - 1; i &gt;= 0; i-- &#123; // reserve key</span><br><span class="line">		rKey += key[i : i+1]</span><br><span class="line">	&#125;</span><br><span class="line">	hexRKey := &quot;&quot;</span><br><span class="line">	for _, char := range []rune(rKey) &#123;</span><br><span class="line">		hexRKey += fmt.Sprintf(&quot;%x&quot;, int(char))</span><br><span class="line">	&#125;</span><br><span class="line">	bigRKey, _ := big.NewInt(0).SetString(hexRKey, 16)</span><br><span class="line">	bigPubKey, _ := big.NewInt(0).SetString(pubKey, 16)</span><br><span class="line">	bigModulus, _ := big.NewInt(0).SetString(modulus, 16)</span><br><span class="line">	bigRs := bigRKey.Exp(bigRKey, bigPubKey, bigModulus)</span><br><span class="line">	hexRs := fmt.Sprintf(&quot;%x&quot;, bigRs)</span><br><span class="line">	return addPadding(hexRs, modulus)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func addPadding(encText string, modulus string) string &#123;</span><br><span class="line">	ml := len(modulus)</span><br><span class="line">	for i := 0; ml &gt; 0 &amp;&amp; modulus[i:i+1] == &quot;0&quot;; i++ &#123;</span><br><span class="line">		ml--</span><br><span class="line">	&#125;</span><br><span class="line">	num := ml - len(encText)</span><br><span class="line">	prefix := &quot;&quot;</span><br><span class="line">	for i := 0; i &lt; num; i++ &#123;</span><br><span class="line">		prefix += &quot;0&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	return prefix + encText</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Music163Spider</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">type Music163Spider struct &#123;</span><br><span class="line">    // send request</span><br><span class="line">	client  *http.Client</span><br><span class="line">	// request&apos;s header</span><br><span class="line">	headers map[string]string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func NewMusic164Spider() (spider Music163Spider) &#123;</span><br><span class="line">	headers := make(map[string]string)</span><br><span class="line">	headers[&quot;Accept&quot;] = &quot;ext/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&quot;</span><br><span class="line">	// empty here</span><br><span class="line">	headers[&quot;Accept-Encoding&quot;] = &quot;&quot;</span><br><span class="line">	headers[&quot;Content-Type&quot;] = &quot;application/x-www-form-urlencoded&quot;</span><br><span class="line">	headers[&quot;User-Agent&quot;] = &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&quot;</span><br><span class="line">	headers[&quot;Host&quot;] = constants.Music163Host</span><br><span class="line">	headers[&quot;Cache-Control&quot;] = &quot;no-cache&quot;</span><br><span class="line">	headers[&quot;Connection&quot;] = &quot;keep-alive&quot;</span><br><span class="line">	headers[&quot;Pragma&quot;] = &quot;no-cache&quot;</span><br><span class="line">	headers[&quot;Origin&quot;] = fmt.Sprintf(&quot;%s%s&quot;, constants.HttpsPrefix, constants.Music163Host)</span><br><span class="line">	headers[&quot;Accept&quot;] = &quot;ext/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&quot;</span><br><span class="line">	return Music163Spider&#123;</span><br><span class="line">		client:  &amp;http.Client&#123;&#125;,</span><br><span class="line">		headers: headers,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加密函数，实现window.asrsea的加密功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func (spider Music163Spider) dataEncrypt(dataBytes []byte) (content map[string]string) &#123;</span><br><span class="line">	content = make(map[string]string)</span><br><span class="line">	randomBytes := encrypt.RandomStr(16)</span><br><span class="line">	params, err := encrypt.AesEncrypt(string(dataBytes), constants.SrcretKey, constants.AseKey)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">	params, err = encrypt.AesEncrypt(params, string(randomBytes), constants.AseKey)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">	encSecKey := encrypt.RsaEncrypt(string(randomBytes), constants.PubKey, constants.Modulus)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">	content[&quot;params&quot;] = string(params)</span><br><span class="line">	content[&quot;encSecKey&quot;] = string(encSecKey)</span><br><span class="line">	return content</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义了发送post请求的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">func (spider Music163Spider) httpPost(url string, headers map[string]string, params interface&#123;&#125;) (result []byte, err error) &#123;</span><br><span class="line">	body := make(url2.Values)</span><br><span class="line">	jsonParams, err := json.Marshal(params)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, err</span><br><span class="line">	&#125;</span><br><span class="line">	encryptResultMap := spider.dataEncrypt(jsonParams)</span><br><span class="line">	body[&quot;params&quot;] = []string&#123;encryptResultMap[&quot;params&quot;]&#125;</span><br><span class="line">	body[&quot;encSecKey&quot;] = []string&#123;encryptResultMap[&quot;encSecKey&quot;]&#125;</span><br><span class="line">	req, err := http.NewRequest(&quot;POST&quot;, url, strings.NewReader(body.Encode()))</span><br><span class="line">	for key, value := range headers &#123;</span><br><span class="line">		req.Header.Add(key, value)</span><br><span class="line">	&#125;</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, err</span><br><span class="line">	&#125;</span><br><span class="line">	resp, err := spider.client.Do(req)</span><br><span class="line">	defer resp.Body.Close()</span><br><span class="line">	data, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return data, nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发送参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">type BaseRequestBody struct &#123;</span><br><span class="line">	Offset    string `json:&quot;offset&quot;`</span><br><span class="line">	Total     string `json:&quot;totail&quot;`</span><br><span class="line">	Limit     string `json:&quot;limit&quot;`</span><br><span class="line">	CsrfToken string `json:&quot;csrf_token&quot;`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type PlayRecordRequestBody struct &#123;</span><br><span class="line">	BaseRequestBody</span><br><span class="line">	Type string `json:&quot;type&quot;`</span><br><span class="line">	Uid  string `json:&quot;uid&quot;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>根据获取排行榜请求返回数据来创建相应的对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">type SongDetail struct &#123;</span><br><span class="line">	Song common.Song `json:&quot;song&quot;`</span><br><span class="line">	// ignore other</span><br><span class="line">&#125;</span><br><span class="line">type PlayRecord struct &#123;</span><br><span class="line">	PlayCount  int        `json:&quot;playCount&quot;`</span><br><span class="line">	Score      int        `json:&quot;score&quot;`</span><br><span class="line">	SongDetail SongDetail `json:&quot;song&quot;`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type PlayRecordResp struct &#123;</span><br><span class="line">	Code     int          `json:&quot;code&quot;`</span><br><span class="line">	AllData  []PlayRecord `json:&quot;allData&quot;`</span><br><span class="line">	WeekData []PlayRecord `json:&quot;weekData&quot;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>定义好对象后，就可以使用模拟发送请求了, spider的GetPlayRecord方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">func (spider Music163Spider) GetPlayRecord(userId string) (record response.PlayRecordResp, err error) &#123;</span><br><span class="line">	playRecordReqBody := request.PlayRecordRequestBody&#123;</span><br><span class="line">		Uid:  userId,</span><br><span class="line">		Type: &quot;-1&quot;,</span><br><span class="line">		BaseRequestBody: request.BaseRequestBody&#123;</span><br><span class="line">			Offset:    &quot;0&quot;,</span><br><span class="line">			Total:     &quot;true&quot;,</span><br><span class="line">			Limit:     &quot;1000&quot;,</span><br><span class="line">			CsrfToken: &quot;&quot;,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	playRecordUrl := fmt.Sprintf(&quot;%s%s%s?csrf_token=&quot;, constants.HttpsPrefix, constants.Music163Host, constants.PlayRecord)</span><br><span class="line">	result, err := spider.httpPost(playRecordUrl, spider.headers, playRecordReqBody)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line">	playRecordResp := response.PlayRecordResp&#123;&#125;</span><br><span class="line">	json.Unmarshal([]byte(result), &amp;playRecordResp)</span><br><span class="line">	return playRecordResp, nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	musicSpider := spider.NewMusic164Spider()</span><br><span class="line">	record, _ := musicSpider.GetPlayRecord(&quot;62947535&quot;)</span><br><span class="line">	jsonData, _ := json.MarshalIndent(record, &quot;&quot;, &quot;\t&quot;)</span><br><span class="line">	fmt.Println(string(jsonData))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果输出</p>
+<p><img src="https://i.imgur.com/sW16J6O.png" alt=""></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://www.manning.com/books/go-in-action" target="_blank" rel="noopener">Go in action</a></li>
+<li><a href="https://studygolang.com/topics/5815" target="_blank" rel="noopener">golang +es 爬取网易云音乐评论(整理版本1)</a></li>
+<li><a href="https://segmentfault.com/a/1190000014948845" target="_blank" rel="noopener">Python 从零开始爬虫(七)——实战：网易云音乐评论爬取（附加密算法）</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+            <a href="/tags/云音乐/" rel="tag"># 云音乐</a>
+          
+        </div>
+      
+
+
+    <div>
+     
+    </div>
+
+
+    <footer class="post-footer">
+        
+     <div>    
+      
+      <ul class="post-copyright">
+         <li class="post-copyright-link">
+          <strong>本文作者：</strong>
+          <a href="/" title="欢迎访问 zhujiajunup 的个人博客">zhujiajunup</a>
+        </li>
+
+        <li class="post-copyright-link">
+          <strong>本文标题：</strong>
+          <a href="https://zhujiajunup.github.io/2019/02/14/go实现网易云音乐爬虫/" title="go实现网易云音乐爬虫">go实现网易云音乐爬虫</a>
+        </li>
+
+        <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="https://zhujiajunup.github.io/2019/02/14/go实现网易云音乐爬虫/" title="go实现网易云音乐爬虫">https://zhujiajunup.github.io/2019/02/14/go实现网易云音乐爬虫/</a>
+        </li>
+
+        <li class="post-copyright-date">
+            <strong>发布时间：</strong>2019年2月14日 - 16时02分
+        </li>  
+
+        <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本文由 zhujiajunup 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="license" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a> <br>转载请保留以上声明信息！
+        </li>
+      </ul>
+    
+  </div>  
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjI4My84ODQ3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="zhujiajunup">
+          <p class="site-author-name" itemprop="name">zhujiajunup</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhujiajunup" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/47452014" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/zhujiajunup" title="Github" target="_blank">Github</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取数据"><span class="nav-number">2.</span> <span class="nav-text">获取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fiddler调试获取参数"><span class="nav-number">2.1.</span> <span class="nav-text">Fiddler调试获取参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go实现"><span class="nav-number">2.2.</span> <span class="nav-text">go实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加密算法"><span class="nav-number">2.2.1.</span> <span class="nav-text">加密算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiajunup</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>| Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("kJ2sJuSJeByLioULSXrJ5CSq-9Nh9j0Va", "uBWeNxCbFEWsOVDTmAInrDq3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+	<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>
