@@ -4,4 +4,4 @@ Disallow:
 
 User-agent: *
 Disallow: 
-Sitemap: https://zhujiajunup.github.io/sitemap.xml
+Sitemap: https://zhujiajunup.github.io//sitemap.xml
