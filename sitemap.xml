@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhujiajunup.cn/about/index.html</loc>
+    
+    <lastmod>2019-02-19T09:16:07.689Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhujiajunup.cn/2019/02/19/CountDownLatch%E7%94%A8%E6%B3%95%E6%B5%85%E6%9E%90/</loc>
     
     <lastmod>2019-02-19T09:10:36.258Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://zhujiajunup.cn/2019/02/14/github-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</loc>
     
     <lastmod>2019-02-15T03:07:04.924Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhujiajunup.cn/about/index.html</loc>
-    
-    <lastmod>2019-02-14T13:00:20.108Z</lastmod>
     
   </url>
   
