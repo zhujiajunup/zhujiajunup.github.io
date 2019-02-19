@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Raft,分布式算法,一致性算法,">
+  <meta name="keywords" content="爬虫,python,新浪微博,urllib,">
 
 
 
@@ -106,23 +106,26 @@
 
 
 
-<meta name="description" content="前言阅读完Diego Ongaro 和 John Ousterhout的In Search of an Understandable Consensus Algorithm(Extended Version)论文，做一个简单的整理 简介一致性算法允许多台机器协同提供服务，在少数机器因种种原因（网络不可用、磁盘损坏、异常退出等）不可用时，对外提供的服务仍然可用。由于Paxos算法难以理解已经实现复杂">
-<meta name="keywords" content="Raft,分布式算法,一致性算法">
+<meta name="description" content="前言（一些废话）最近试了一下网页版的(weibo.com)和移动端的(m.weibo.cn)，网页版的解析一大堆网页实在是太麻烦，移动端只需要请求，直接返回json数据，这里对这两种方式做了下优缺点对比 网页版 优点   用户信息获取的很全面，出生日期、性取向、感情状况是移动端不能获取的 微博、粉丝可以抓取的比较全面 可以学习xpath、bs4、正则的网页解析   缺点   要花钱哦，因为多账号登">
+<meta name="keywords" content="爬虫,python,新浪微博,urllib">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Raft一致性算法详解">
-<meta property="og:url" content="https://zhujiajunup.cn/2019/02/18/Raft一致性算法详解/index.html">
+<meta property="og:title" content="python3+urllib实现新浪微博爬虫">
+<meta property="og:url" content="https://zhujiajunup.cn/2019/02/19/python3-urllib实现新浪微博爬虫/index.html">
 <meta property="og:site_name" content="zhujiajunup">
-<meta property="og:description" content="前言阅读完Diego Ongaro 和 John Ousterhout的In Search of an Understandable Consensus Algorithm(Extended Version)论文，做一个简单的整理 简介一致性算法允许多台机器协同提供服务，在少数机器因种种原因（网络不可用、磁盘损坏、异常退出等）不可用时，对外提供的服务仍然可用。由于Paxos算法难以理解已经实现复杂">
+<meta property="og:description" content="前言（一些废话）最近试了一下网页版的(weibo.com)和移动端的(m.weibo.cn)，网页版的解析一大堆网页实在是太麻烦，移动端只需要请求，直接返回json数据，这里对这两种方式做了下优缺点对比 网页版 优点   用户信息获取的很全面，出生日期、性取向、感情状况是移动端不能获取的 微博、粉丝可以抓取的比较全面 可以学习xpath、bs4、正则的网页解析   缺点   要花钱哦，因为多账号登">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/a0B7PRt.png">
-<meta property="og:image" content="https://i.imgur.com/IDupGRe.png">
-<meta property="og:image" content="https://i.imgur.com/fspF0r6.png">
-<meta property="og:image" content="https://i.imgur.com/nx0XDjM.png">
-<meta property="og:updated_time" content="2019-02-18T15:22:03.531Z">
+<meta property="og:image" content="http://i.imgur.com/dE9BHMw.png">
+<meta property="og:image" content="http://i.imgur.com/QuNbY4N.png">
+<meta property="og:image" content="http://i.imgur.com/dHe17JD.png">
+<meta property="og:image" content="http://i.imgur.com/KltTfzw.png">
+<meta property="og:image" content="http://i.imgur.com/peZuxWD.png">
+<meta property="og:image" content="http://i.imgur.com/DnbYiPC.png">
+<meta property="og:image" content="http://i.imgur.com/Bx5xC4C.png">
+<meta property="og:updated_time" content="2019-02-19T09:26:07.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Raft一致性算法详解">
-<meta name="twitter:description" content="前言阅读完Diego Ongaro 和 John Ousterhout的In Search of an Understandable Consensus Algorithm(Extended Version)论文，做一个简单的整理 简介一致性算法允许多台机器协同提供服务，在少数机器因种种原因（网络不可用、磁盘损坏、异常退出等）不可用时，对外提供的服务仍然可用。由于Paxos算法难以理解已经实现复杂">
-<meta name="twitter:image" content="https://i.imgur.com/a0B7PRt.png">
+<meta name="twitter:title" content="python3+urllib实现新浪微博爬虫">
+<meta name="twitter:description" content="前言（一些废话）最近试了一下网页版的(weibo.com)和移动端的(m.weibo.cn)，网页版的解析一大堆网页实在是太麻烦，移动端只需要请求，直接返回json数据，这里对这两种方式做了下优缺点对比 网页版 优点   用户信息获取的很全面，出生日期、性取向、感情状况是移动端不能获取的 微博、粉丝可以抓取的比较全面 可以学习xpath、bs4、正则的网页解析   缺点   要花钱哦，因为多账号登">
+<meta name="twitter:image" content="http://i.imgur.com/dE9BHMw.png">
 
 
 
@@ -150,7 +153,7 @@
 
 
 
-  <link rel="canonical" href="https://zhujiajunup.cn/2019/02/18/Raft一致性算法详解/">
+  <link rel="canonical" href="https://zhujiajunup.cn/2019/02/19/python3-urllib实现新浪微博爬虫/">
 
 
 
@@ -173,7 +176,7 @@
 </style>
 
 
-  <title> Raft一致性算法详解 | zhujiajunup </title>
+  <title> python3+urllib实现新浪微博爬虫 | zhujiajunup </title>
 </head>
 
   	 <!-- custom analytics part create by xiamo -->
@@ -398,7 +401,7 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zhujiajunup.cn/2019/02/18/Raft一致性算法详解/">
+  <link itemprop="mainEntityOfPage" href="https://zhujiajunup.cn/2019/02/19/python3-urllib实现新浪微博爬虫/">
 
   <span style="display:none" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
     <meta itemprop="name" content="zhujiajunup">
@@ -422,7 +425,7 @@ $(function() {
             
             
               
-                Raft一致性算法详解
+                python3+urllib实现新浪微博爬虫
               
             
           </h2>
@@ -437,8 +440,8 @@ $(function() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-18T18:59:31+08:00">
-                2019-02-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-19T17:25:22+08:00">
+                2019-02-19
               </time>
             
 
@@ -460,8 +463,8 @@ $(function() {
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式算法/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式算法</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -471,8 +474,8 @@ $(function() {
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式算法/一致性算法/" itemprop="url" rel="index">
-                    <span itemprop="name">一致性算法</span>
+                  <a href="/categories/python/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
                   </a>
                 </span>
 
@@ -491,7 +494,7 @@ $(function() {
 			 
           
           
-             <span id="/2019/02/18/Raft一致性算法详解/" class="leancloud_visitors" data-flag-title="Raft一致性算法详解">
+             <span id="/2019/02/19/python3-urllib实现新浪微博爬虫/" class="leancloud_visitors" data-flag-title="python3+urllib实现新浪微博爬虫">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -516,7 +519,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  1.6k
                 </span>
               
 
@@ -532,7 +535,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5
+                  6
                 </span>
               
             </div>
@@ -554,34 +557,73 @@ $(function() {
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>阅读完Diego Ongaro 和 John Ousterhout的In Search of an Understandable Consensus Algorithm(Extended Version)论文，做一个简单的整理</p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>一致性算法允许多台机器协同提供服务，在少数机器因种种原因（网络不可用、磁盘损坏、异常退出等）不可用时，对外提供的服务仍然可用。<br>由于Paxos算法难以理解已经实现复杂，Stanford University的Diego Ongaro等设计了Raft一致性算法，易懂性是该算法的主要设计目标。</p>
-<h2 id="复制状态机"><a href="#复制状态机" class="headerlink" title="复制状态机"></a>复制状态机</h2><p><img src="https://i.imgur.com/a0B7PRt.png" alt=""><br>复制状态机经常被用于分布式系统中来解决错误容忍的问题，比如GFS、HDFS等。<br>复制状态机典型的实现时使用复制日志，如上图所示<br>每台机器保存了包含一系列命令的日志文件，状态机按顺序执行这些名利，每个日志以相同的顺序保存命令，这样就可以确保每台机器执行的命令是相同的，这就保证了相同状态下，同一条命令的执行结果是相同的</p>
-<h1 id="Raft一致性算法"><a href="#Raft一致性算法" class="headerlink" title="Raft一致性算法"></a>Raft一致性算法</h1><p>Raft算法首先算着一个唯一的leader，leader来负责管理副本日志。<br>leader从客户端接收日志，然后将他们保存在其他的节点上。然后告诉其他节点将日志提交到自身维护的状态机中去。<br>因此Raft将一致性算法的实现分为以下三部分：</p>
-<ul>
-<li>leader选举</li>
-<li>日志备份</li>
-<li>安全性</li>
+        <h1 id="前言（一些废话）"><a href="#前言（一些废话）" class="headerlink" title="前言（一些废话）"></a>前言（一些废话）</h1><p>最近试了一下网页版的(<a href="http://weibo.com/" target="_blank" rel="noopener">weibo.com</a>)和移动端的(<a href="http://m.weibo.cn/" target="_blank" rel="noopener">m.weibo.cn</a>)，网页版的解析一大堆网页实在是太麻烦，移动端只需要请求，直接返回json数据，这里对这两种方式做了下优缺点对比</p>
+<h2 id="网页版"><a href="#网页版" class="headerlink" title="网页版"></a>网页版</h2><ul>
+<li>优点</li>
 </ul>
-<h2 id="Raft基础"><a href="#Raft基础" class="headerlink" title="Raft基础"></a>Raft基础</h2><h3 id="节点状态"><a href="#节点状态" class="headerlink" title="节点状态"></a>节点状态</h3><p>一个Raft集群包含了多个服务器节点，最典型的集群有5个节点，允许系统中两台机器不可用。<br>每一个节点只有如下一种状态:</p>
-<ul>
-<li>leader</li>
-<li>follower</li>
-<li>condidate<br><img src="https://i.imgur.com/IDupGRe.png" alt="节点状态"></li>
-</ul>
-<h3 id="任期-terms"><a href="#任期-terms" class="headerlink" title="任期(terms)"></a>任期(terms)</h3><p>Raft将时间划分为随意长度的terms，如下图所示<br><img src="https://i.imgur.com/fspF0r6.png" alt="Terms"><br>每一个任期有一个单调递增的任期号，每一个任期的开始将进行选举操作，这时就有一台或多台机器尝试成为leader。如果一个condidate选举成功后，在任期剩下的时间里他就是整个集群的leader。<br>如果一个任期中没有一个leader被选举出来，那将会开始下一个任期并重新开始选举。<br>任期在Raft中就像是一个逻辑时钟，他可以让一个节点来检测废弃的信息比如老的leader。每一个节点存储了该节点当前的任期号，并且在之后与其他节点通信时都会交换各节点的任期号。<br>如果一个节点存储的任期号小于其他节点的任期号，它将会更新自身的任期号为更大的那个任期号。<br>如果一个condidate或者leader节点的发现自己的任期号已经过时了（发现有比自身任期号大的任期号），它马上就会将状态转变为follower<br>如果一个节点收到了一个比自身任期号还小的请求，直接拒绝该请求。<br>而Raft各节点之间的通行是通过RPC来进行的。</p>
-<h3 id="RPCs"><a href="#RPCs" class="headerlink" title="RPCs"></a>RPCs</h3><p>Raft中有两种类型的RPC</p>
-<ul>
-<li>AppendEntries RPC</li>
-<li>RequestVote RPC<br>RequestVote RPC在leader选举时使用<br>AppendEntries RPC在日志备份时使用</li>
-</ul>
-<h2 id="leader选举"><a href="#leader选举" class="headerlink" title="leader选举"></a>leader选举</h2><p>Raft使用心跳机制来发起leader选举。<br><img src="https://i.imgur.com/nx0XDjM.png" alt=""><br>在系统启动的时候，所有机器节点的状态都为follower。一个节点只要它在term超时前从leader节点收到有效的RPCs，他就持续follower状态。<br>leader节点会向其他follower节点周期性的发送心跳（没有任何日志的AppendEntries RPCs）来告诉leader还存活着。<br>如果一个follower在选举超时这段时间内未收到任何消息，那么它就会任务当前没有可用leader，它发起leader选举。<br>    在发起选举时，就会增加自己的term,然后变为candidate状态。然后投票给自己，并发起RequestVote<br>RPCs给集群内的其他节点。<br>当以下三种情况发生之前，节点将持续candidate状态：</p>
 <ol>
-<li>在选举中胜出</li>
-<li>另外一个节点声明它是leader</li>
-<li>选举超时，没有胜出节点<br> 如果一个节点在同一个term获得了当前集群大多数的投票，那么它在选举中胜出成为leader。<br>每个server在给定的term基于先到先服务的原则最多只投票给一个candidate节点。<br>这就保证了最多只有一个condidate可以在选举中胜出成为leader（<font color="red">Election Safety: 在给定的term内最多只有一个leader</font>）<br>一旦condidate选举胜出，它就变成了leader，然后马上发送心跳消息给其他节点来告诉自己的leader身份和防止新的选举<br> 在等待投票期间，condidate可能收到其他节点申明自己是leader的AppendEntries<br>PRC消息，如果在leader发送过来的RPC中的term号大于等于candidate自身的term号，那么candidate节点的状态就变为follower,然后将当前term号更新为leader的term号。<br>如果RPC中的term号比自身的term号小，说明该请求已经过时了，则忽略该请求继续保持candidate状态<br> 如果一个candidate既没有胜出有没有失败（票数被多个candidate平分了）,每个candidate将会等待超时<br>，开始新一轮的选举，Raft中使用一个随机的选举超时时间来减少票数被平分的情况的发生。选举超时时间在一定间隔段随机选取（150-300ms），这样就可以保证在大多数情况下只用一个节点会超时。</li>
+<li>用户信息获取的很全面，出生日期、性取向、感情状况是移动端不能获取的</li>
+<li>微博、粉丝可以抓取的比较全面</li>
+<li>可以学习xpath、bs4、正则的网页解析</li>
 </ol>
-<h2 id="日志备份"><a href="#日志备份" class="headerlink" title="日志备份"></a>日志备份</h2><p>当leader被选举出来后，它就要处理client请求了。<br>每一个客户端请求包含了等待复制状态机要执行的命令。</p>
+<ul>
+<li>缺点</li>
+</ul>
+<ol>
+<li>要花钱哦，因为多账号登录需要验证码，验证码识别的话，用云打码（没用过）是收费的</li>
+<li>解析页面恶心的一批，要写正则、要去看网页…比较麻烦</li>
+</ol>
+<h2 id="移动版"><a href="#移动版" class="headerlink" title="移动版"></a>移动版</h2><ul>
+<li>优点</li>
+</ul>
+<ol>
+<li>不需要验证码</li>
+<li>直接解析json</li>
+</ol>
+<ul>
+<li>缺点</li>
+</ul>
+<ol>
+<li>个人信息不全</li>
+<li>微博、粉丝分页到了250之后，就没有数据返回了，暂时还没解决这个是为什么。</li>
+</ol>
+<p>现在用的是移动版，配了5个微博账号，5个线程在跑，电脑扔在寝室跑，不敢说一天多少多少数据，但现在保持在一天用户30W、微博20W左右的数据量…只跑了两天…</p>
+<p>源码的话，看后面….</p>
+<h1 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h1><p>其实思路很简单，就是通过urllib模拟请求登录、发请求，然后解析json，存数据库…当然程序还有很多优化的地方，以后慢慢改进</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>python3</li>
+<li>django 1.11.3</li>
+<li>mysql 5.7.17</li>
+<li>fiddler 4</li>
+</ul>
+<h2 id="抓取"><a href="#抓取" class="headerlink" title="抓取"></a>抓取</h2><p>写爬虫的套路就是，访问页面，分析页面行为，也就是页面的每一个操作都发了什么样的请求，返回了什么数据，记住这个套路，还有什么爬虫不能写。</p>
+<h3 id="模拟登陆"><a href="#模拟登陆" class="headerlink" title="模拟登陆"></a>模拟登陆</h3><p>打开<a href="http://m.weibo.cn" target="_blank" rel="noopener">m.weibo.cn</a>，打开fiddler 4，开启https请求的捕捉，不知道怎么开自行google<br>当你输入好账号、密码点击登录的时候，看fiddler4捕获的请求</p>
+<p><img src="http://i.imgur.com/dE9BHMw.png" alt=""></p>
+<p><img src="http://i.imgur.com/QuNbY4N.png" alt=""><br>post请求，当然是看看他发了什么数据啦….</p>
+<p><img src="http://i.imgur.com/dHe17JD.png" alt=""></p>
+<p>再看看response的数据</p>
+<p><img src="http://i.imgur.com/KltTfzw.png" alt=""><br>返回了用户登录的状态，uid…<br>你可以访问 www://weibo.com/u/ + 上图的uid加一波微博关注（真无耻，强行吸粉）</p>
+<p>密码没有做任何加密处理，嘻嘻，很简单吧，现在只要模拟个post请求就行了。是不是很简单？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">def login(user_name, password, opener):</span><br><span class="line">    LOGGER.info(user_name + &apos; login&apos;)</span><br><span class="line">    args = &#123;</span><br><span class="line">        &apos;username&apos;: user_name,</span><br><span class="line">        &apos;password&apos;: password,</span><br><span class="line">        &apos;savestate&apos;: 1,</span><br><span class="line">        &apos;ec&apos;: 0,</span><br><span class="line">        &apos;pagerefer&apos;: &apos;https://passport.weibo.cn/signin/&apos;</span><br><span class="line">                     &apos;welcome?entry=mweibo&amp;r=http%3A%2F%2Fm.weibo.cn%2F&amp;wm=3349&amp;vt=4&apos;,</span><br><span class="line">        &apos;entry&apos;: &apos;mweibo&apos;,</span><br><span class="line">        &apos;wentry&apos;: &apos;&apos;,</span><br><span class="line">        &apos;loginfrom&apos;: &apos;&apos;,</span><br><span class="line">        &apos;client_id&apos;: &apos;&apos;,</span><br><span class="line">        &apos;code&apos;: &apos;&apos;,</span><br><span class="line">        &apos;qq&apos;: &apos;&apos;,</span><br><span class="line">        &apos;hff&apos;: &apos;&apos;,</span><br><span class="line">        &apos;hfp&apos;: &apos;&apos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    post_data = urllib.parse.urlencode(args).encode()</span><br><span class="line">    try_time = 0</span><br><span class="line">    while try_time &lt; constants.TRY_TIME:</span><br><span class="line">        try:</span><br><span class="line">            resp = opener.open(constants.LOGIN_URL, post_data)</span><br><span class="line">            resp_json = json.loads(resp.read().decode())</span><br><span class="line">            if &apos;retcode&apos; in resp_json and resp_json[&apos;retcode&apos;] == &apos;20000000&apos;:</span><br><span class="line">                LOGGER.info(&quot;%s login successful&quot; % user_name)</span><br><span class="line">                break</span><br><span class="line">            else:</span><br><span class="line">                LOGGER.warn(&apos;login fail:%s&apos; % str(resp_json))</span><br><span class="line">                sleep(10)</span><br><span class="line">                try_time += 1</span><br><span class="line">        except :</span><br><span class="line">            LOGGER.error(&quot;login failed&quot;)</span><br><span class="line">            LOGGER.error(traceback.print_exc())</span><br><span class="line">            sleep(10)</span><br><span class="line">            try_time += 1</span><br><span class="line">            LOGGER.info(&apos;try %d time&apos; % try_time)</span><br></pre></td></tr></table></figure>
+<p>看看写的模拟登录能不能用，当然要测试啦，这个测试当然是你自己写啦，反正我已经测试过了，如果不出意外的话，你的测试会不通过，如下URLError<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;E:\codingspace\python\Jpider\spiders\weibo\weibo_http.py&quot;, line 40, in login</span><br><span class="line">    resp = opener.open(constants.LOGIN_URL, post_data)</span><br><span class="line">  File &quot;D:\ProgramData\Anaconda3\lib\urllib\request.py&quot;, line 526, in open</span><br><span class="line">    response = self._open(req, data)</span><br><span class="line">  File &quot;D:\ProgramData\Anaconda3\lib\urllib\request.py&quot;, line 544, in _open</span><br><span class="line">    &apos;_open&apos;, req)</span><br><span class="line">  File &quot;D:\ProgramData\Anaconda3\lib\urllib\request.py&quot;, line 504, in _call_chain</span><br><span class="line">    result = func(*args)</span><br><span class="line">  File &quot;D:\ProgramData\Anaconda3\lib\urllib\request.py&quot;, line 1361, in https_open</span><br><span class="line">    context=self._context, check_hostname=self._check_hostname)</span><br><span class="line">  File &quot;D:\ProgramData\Anaconda3\lib\urllib\request.py&quot;, line 1320, in do_open</span><br><span class="line">    raise URLError(err)</span><br><span class="line">urllib.error.URLError: &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:749)&gt;</span><br></pre></td></tr></table></figure></p>
+<p>哎呀，好烦，又报错，怎么办呢，stackoverflow欢迎你，传送门<a href="https://stackoverflow.com/" target="_blank" rel="noopener">https://stackoverflow.com/</a>，有错自己查，stackoverflow能解决99%你遇到的问题。</p>
+<h2 id="关注信息抓取"><a href="#关注信息抓取" class="headerlink" title="关注信息抓取"></a>关注信息抓取</h2><p>登录就那么轻松的搞定了，用户信息、微博、粉丝、关注的套路都是一样，分析拦截的请求，看哪个请求是返回数据的，然后自己模拟这个请求，就ok啦。</p>
+<p>这里就只做用户关注的抓取示例，其他的自己去依葫芦画瓢。<br>最近在看环法，自己也是个骑行爱好者…现在天热…都不能出去骑了，很绝望。<br>就以<a href="https://m.weibo.cn/u/5901021570" target="_blank" rel="noopener">环法自行车赛</a>这个用户的关注信息为例吧</p>
+<p><img src="http://i.imgur.com/peZuxWD.png" alt=""></p>
+<p>现在你可以借助chrome的工具栏看请求，windows下的快捷键是F12</p>
+<p>查看他的关注-&gt;全部关注。你会发现浏览器发了如下的请求<br><img src="http://i.imgur.com/DnbYiPC.png" alt=""></p>
+<p>你可以直接复制这个请求，在浏览器上打开。</p>
+<p><img src="http://i.imgur.com/Bx5xC4C.png" alt=""></p>
+<p>可以看到这个请求返回的就是他的关注用户的json数据，而python中的json模块直接解析，很方便吧。</p>
+<p>看看这个url[<a href="https://m.weibo.cn/api/container/getIndex?containerid=231051_-_followers_-_5901021570&amp;luicode=10000011&amp;lfid=1005055901021570&amp;featurecode=20000320&amp;type=uid&amp;value=5901021570" target="_blank" rel="noopener">点开试试?</a>]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://m.weibo.cn/api/container/getIndex?containerid=231051_-_followers_-_5901021570&amp;luicode=10000011&amp;lfid=1005055901021570&amp;featurecode=20000320&amp;type=uid&amp;value=5901021570</span><br></pre></td></tr></table></figure></p>
+<p>该用户的uid为5901021570，url是怎么拼的不用再多说了吧。</p>
+<p>当然还有分页，自己往下拖，你可以看到url上会多了个page的参数，那个就是页号</p>
+<p>数据都拿到了，还等什么？解析完后想怎么存怎么存吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def grab_user_follower(self, user_id):</span><br><span class="line">    opener = weibo_http.get_openner()</span><br><span class="line">    user = self.grab_user(user_id)</span><br><span class="line">    att_num = user.attNum</span><br><span class="line">    max_page = int(int(att_num) / 20)</span><br><span class="line">    page = 1</span><br><span class="line">    while page &lt;= max_page:</span><br><span class="line">        resp = opener.open(constants.FOLLOWER_URL_PATTERN % (user_id, user_id, str(page)))</span><br><span class="line">        self.logger.info(constants.FOLLOWER_URL_PATTERN % (user_id, user_id, str(page)))</span><br><span class="line">        r = resp.read()</span><br><span class="line">        resp_json = json.loads(r.decode())</span><br><span class="line">        if &apos;msg&apos; in resp_json:</span><br><span class="line">            break</span><br><span class="line">        for card in resp_json[&apos;cards&apos;]:</span><br><span class="line"></span><br><span class="line">            for cg in filter(lambda c: &apos;user&apos; in c, card[&apos;card_group&apos;]):</span><br><span class="line">                follower = dao.save_user_info(cg[&apos;user&apos;])</span><br><span class="line">                dao.save_relationship(follower, user)</span><br><span class="line">                self.id_enqueue(follower.id, self.user_set_lock, self.CRAWLED_USERS, self.user_queue)</span><br><span class="line">        page += 1</span><br></pre></td></tr></table></figure>
+<h2 id="后语"><a href="#后语" class="headerlink" title="后语"></a>后语</h2><p>关于微博移动端的抓取就暂时说这么多吧，说实话，移动端还是比较简单的，多线程可以搞定，只开了五个，日抓取量已经达到了30W用户+20W微博了，之后打算改成分布式的…</p>
+<p>关于源码，暂时还没想放出来，因为不开心,而且我觉得这个也没什么难度，基本可以自己动手写，单线程写完再改成多线程的，很easy的…</p>
+<p>当然我已经放在github了，地址暂时先不放，考验你找资料的能力了….</p>
+<p>过几天再把网页版的抓取过程放上来，心情好点再说…</p>
 
       
     </div>
@@ -595,11 +637,13 @@ $(function() {
   
         <div class="post-tags">
           
-            <a href="/tags/Raft/" rel="tag"># Raft</a>
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
           
-            <a href="/tags/分布式算法/" rel="tag"># 分布式算法</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
-            <a href="/tags/一致性算法/" rel="tag"># 一致性算法</a>
+            <a href="/tags/新浪微博/" rel="tag"># 新浪微博</a>
+          
+            <a href="/tags/urllib/" rel="tag"># urllib</a>
           
         </div>
       
@@ -622,16 +666,16 @@ $(function() {
 
         <li class="post-copyright-link">
           <strong>本文标题：</strong>
-          <a href="https://zhujiajunup.cn/2019/02/18/Raft一致性算法详解/" title="Raft一致性算法详解">Raft一致性算法详解</a>
+          <a href="https://zhujiajunup.cn/2019/02/19/python3-urllib实现新浪微博爬虫/" title="python3+urllib实现新浪微博爬虫">python3+urllib实现新浪微博爬虫</a>
         </li>
 
         <li class="post-copyright-link">
           <strong>本文链接：</strong>
-          <a href="https://zhujiajunup.cn/2019/02/18/Raft一致性算法详解/" title="Raft一致性算法详解">https://zhujiajunup.cn/2019/02/18/Raft一致性算法详解/</a>
+          <a href="https://zhujiajunup.cn/2019/02/19/python3-urllib实现新浪微博爬虫/" title="python3+urllib实现新浪微博爬虫">https://zhujiajunup.cn/2019/02/19/python3-urllib实现新浪微博爬虫/</a>
         </li>
 
         <li class="post-copyright-date">
-            <strong>发布时间：</strong>2019年2月18日 - 18时02分
+            <strong>发布时间：</strong>2019年2月19日 - 17时02分
         </li>  
 
         <li class="post-copyright-license">
@@ -645,8 +689,8 @@ $(function() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/15/neo4j图数据库/" rel="next" title="neo4j图数据库">
-                <i class="fa fa-chevron-left"></i> neo4j图数据库
+              <a href="/2019/02/19/CountDownLatch用法浅析/" rel="next" title="CountDownLatch用法浅析">
+                <i class="fa fa-chevron-left"></i> CountDownLatch用法浅析
               </a>
             
           </div>
@@ -655,8 +699,8 @@ $(function() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/19/CountDownLatch用法浅析/" rel="prev" title="CountDownLatch用法浅析">
-                CountDownLatch用法浅析 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/19/spring-boot-多模块简单示例/" rel="prev" title="spring boot 多模块简单示例">
+                spring boot 多模块简单示例 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -814,7 +858,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复制状态机"><span class="nav-number">2.1.</span> <span class="nav-text">复制状态机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Raft一致性算法"><span class="nav-number">3.</span> <span class="nav-text">Raft一致性算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Raft基础"><span class="nav-number">3.1.</span> <span class="nav-text">Raft基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点状态"><span class="nav-number">3.1.1.</span> <span class="nav-text">节点状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任期-terms"><span class="nav-number">3.1.2.</span> <span class="nav-text">任期(terms)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPCs"><span class="nav-number">3.1.3.</span> <span class="nav-text">RPCs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leader选举"><span class="nav-number">3.2.</span> <span class="nav-text">leader选举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志备份"><span class="nav-number">3.3.</span> <span class="nav-text">日志备份</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言（一些废话）"><span class="nav-number">1.</span> <span class="nav-text">前言（一些废话）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网页版"><span class="nav-number">1.1.</span> <span class="nav-text">网页版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动版"><span class="nav-number">1.2.</span> <span class="nav-text">移动版</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正题"><span class="nav-number">2.</span> <span class="nav-text">正题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">2.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抓取"><span class="nav-number">2.2.</span> <span class="nav-text">抓取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟登陆"><span class="nav-number">2.2.1.</span> <span class="nav-text">模拟登陆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关注信息抓取"><span class="nav-number">2.3.</span> <span class="nav-text">关注信息抓取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后语"><span class="nav-number">2.4.</span> <span class="nav-text">后语</span></a></li></ol></li></ol></div>
             
 
           </div>
